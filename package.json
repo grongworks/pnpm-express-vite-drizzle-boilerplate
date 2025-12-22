@@ -1,0 +1,32 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "Clean, minimal full-stack boilerplate",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter=backend dev & pnpm --filter=frontend dev",
+    "dev:backend": "pnpm --filter=backend dev",
+    "dev:frontend": "pnpm --filter=frontend dev",
+    "build": "pnpm --filter='@shared/*' build && pnpm --filter=backend build && pnpm --filter=frontend build",
+    "build:backend": "pnpm --filter='@shared/*' build && pnpm --filter=backend build",
+    "build:frontend": "pnpm --filter='@shared/*' build && pnpm --filter=frontend build",
+    "type-check": "pnpm --filter='backend' type-check && pnpm --filter='frontend' type-check",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prisma:migrate": "pnpm --filter=backend prisma:migrate",
+    "prisma:reset": "pnpm --filter=backend prisma:reset",
+    "prisma:generate": "pnpm --filter=backend prisma:generate"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.50.1",
+    "@typescript-eslint/parser": "^8.50.1",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "typescript": "^5.3.3"
+  }
+}

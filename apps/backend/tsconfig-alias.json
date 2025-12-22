@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@shared/types": ["../../packages/types/dist/index.d.ts"],
+      "@shared/types/*": ["../../packages/types/dist/*"]
+    }
+  },
+  "resolveFullPaths": true,
+  "replacers": {
+    "resolveExtension": {
+      "enabled": true,
+      "extensions": {
+        ".js": [".ts", ".js"],
+        ".mjs": [".mts", ".mjs"],
+        ".cjs": [".cts", ".cjs"]
+      }
+    }
+  }
+}
+

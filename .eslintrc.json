@@ -1,0 +1,54 @@
+{
+  "root": true,
+  "env": {
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "ignorePatterns": [
+    "node_modules/",
+    "**/dist/",
+    "**/build/",
+    "**/public/",
+    ".husky/",
+    ".git/"
+  ],
+  "settings": {
+    "react": { "version": "detect" }
+  },
+  "overrides": [
+    {
+      "files": ["apps/backend/**/*.{ts,tsx,js,jsx}"],
+      "env": { "node": true },
+      "parserOptions": {
+        "project": ["apps/backend/tsconfig.json"],
+        "tsconfigRootDir": "."
+      }
+    },
+    {
+      "files": ["apps/frontend/**/*.{ts,tsx,js,jsx}"],
+      "env": { "browser": true },
+      "parserOptions": {
+        "project": ["apps/frontend/tsconfig.json"],
+        "tsconfigRootDir": "."
+      }
+    },
+    {
+      "files": ["**/*.js"],
+      "parserOptions": {
+        "project": []
+      }
+    }
+  ]
+}
+
