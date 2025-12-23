@@ -10,6 +10,7 @@
     "build": "pnpm --filter='@shared/*' build && pnpm --filter=backend build && pnpm --filter=frontend build",
     "build:backend": "pnpm --filter='@shared/*' build && pnpm --filter=backend build",
     "build:frontend": "pnpm --filter='@shared/*' build && pnpm --filter=frontend build",
+    "build:types:watch": "pnpm --filter='@shared/*' build",
     "type-check": "pnpm --filter='backend' type-check && pnpm --filter='frontend' type-check",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write .",
