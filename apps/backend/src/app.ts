@@ -1,7 +1,8 @@
 import express, { Express } from "express";
 import { errorHandler } from "./middleware/errorHandler";
 import { HelloMessage } from "@shared/types";
-import { prisma } from "./lib/prisma";
+import { db } from "./lib/db";
+import { changeMeIfNeeded } from "./lib/schema";
 
 export function createApp(): Express {
   const app = express();
@@ -13,11 +14,9 @@ export function createApp(): Express {
   app.get("/api/health", async (_req, res) => {
     const message: HelloMessage = { status: "okido" };
 
-    await prisma.changeMeIfNeeded.create({
-      data: {},
-    });
+    await db.insert(changeMeIfNeeded).values({});
 
-    const data = await prisma.changeMeIfNeeded.findMany();
+    const data = await db.select().from(changeMeIfNeeded);
     res.json({
       ...message,
       data,
