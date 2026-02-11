@@ -9,7 +9,7 @@ A clean, minimal full-stack boilerplate for customer projects.
 - **Package Manager**: pnpm
 - **Backend**: Express (TypeScript)
 - **Frontend**: Vite + React (TypeScript)
-- **ORM**: Prisma (no models)
+- **ORM**: Drizzle ORM with PostgreSQL
 - **Styling**: Tailwind CSS + Ant Design
 - **Structure**: Monorepo with shared types
 
@@ -17,11 +17,14 @@ A clean, minimal full-stack boilerplate for customer projects.
 
 ```
 /apps
-  /backend          Express application
+  /backend
+    /drizzle        Drizzle ORM migrations
+    /src
+      /lib          Database client and schema
+    drizzle.config.ts
   /frontend         React + Vite application
 /packages
   /types            Shared TypeScript types
-/prisma            Prisma ORM configuration (empty schema)
 ```
 
 ## Setup
@@ -51,6 +54,7 @@ pnpm build
 
 ## Scripts
 
+**General:**
 - `pnpm dev` – Start frontend and backend in development mode
 - `pnpm dev:backend` – Start backend only
 - `pnpm dev:frontend` – Start frontend only
@@ -60,14 +64,36 @@ pnpm build
 - `pnpm type-check` – Run TypeScript type checking
 - `pnpm lint` – Run linting
 
+**Database (from `/apps/backend`):**
+- `pnpm db:generate` – Generate Drizzle migrations
+- `pnpm db:migrate` – Run pending migrations
+- `pnpm db:push` – Push schema changes to database
+
+## Database Setup
+
+Before running the application, ensure a PostgreSQL database is set up and the connection string is configured in `.env`:
+
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+```
+
+Then run migrations:
+```bash
+cd apps/backend
+pnpm db:generate  # Generate migrations from schema changes
+pnpm db:migrate   # Run migrations
+```
+
 ## Next Steps
 
 This boilerplate contains only infrastructure and tooling. To extend it:
 
-1. **Define models** in `/prisma/schema.prisma`
-2. **Create backend routes** in `/apps/backend/src`
-3. **Build frontend pages** in `/apps/frontend/src`
-4. **Add shared types** to `/packages/types/src`
+1. **Update database schema** in `/apps/backend/src/lib/schema.ts` (replace the example table)
+2. **Generate migrations** with `pnpm db:generate` from the backend directory
+3. **Apply migrations** with `pnpm db:migrate`
+4. **Build backend API** routes in `/apps/backend/src`
+5. **Create frontend pages** in `/apps/frontend/src`
+6. **Define shared types** in `/packages/types/src`
 
-No business logic, auth, or example features are included.
+No business logic, authentication, or example features are included.
 
